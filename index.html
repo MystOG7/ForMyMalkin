@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sunflower 🌻</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&family=Great+Vibes&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 30%, #ffe082 60%, #fff3e0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating sunflowers background */
+        .floating-sunflower {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.15;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(15deg); }
+            50% { transform: translateY(-15px) rotate(-10deg); }
+            75% { transform: translateY(-40px) rotate(20deg); }
+        }
+
+        /* Heart particles */
+        .heart-particle {
+            position: fixed;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: heartFloat 8s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes heartFloat {
+            0% { opacity: 0; transform: translateY(100vh) scale(0.5); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1.2); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.2);
+            animation: fadeInDown 1.5s ease-out;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: #f57f17;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header .sunflower-icon {
+            font-size: 4rem;
+            display: inline-block;
+            animation: spin 10s linear infinite, bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+
+        /* Timer Section */
+        .timer-section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(255, 193, 7, 0.15);
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            border: 2px solid rgba(255, 193, 7, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .timer-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.8rem;
+            color: #e65100;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .timer-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .timer-box {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border-radius: 20px;
+            padding: 20px 15px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(255, 193, 7, 0.3);
+            animation: boxPulse 2s infinite;
+            border: 2px solid #ffca28;
+        }
+
+        @keyframes boxPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 5px 20px rgba(255, 193, 7, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(255, 193, 7, 0.5); }
+        }
+
+        .timer-box .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e65100;
+            display: block;
+        }
+
+        .timer-box .label {
+            font-size: 0.8rem;
+            color: #f57f17;
+            font-weight: 600;
+        }
+
+        .start-time {
+            text-align: center;
+            color: #bf360c;
+            font-size: 1rem;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .time-zones {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .time-zone {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #ffca28;
+            animation: slideIn 1s ease-out 0.5s both;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .time-zone .flag {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .time-zone .country {
+            font-weight: 600;
+            color: #e65100;
+            font-size: 0.9rem;
+        }
+
+        .time-zone .current-time {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #bf360c;
+            margin-top: 5px;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background: rgba(255, 248, 225, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(255, 193, 7, 0.15);
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '💛';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.05;
+            top: -20px;
+            left: -20px;
+        }
+
+        .quote-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #e65100;
+            line-height: 1.8;
+        }
+
+        /* Image Sections */
+        .section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(255, 193, 7, 0.15);
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+            border: 2px solid rgba(255, 193, 7, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.6rem;
+            color: #e65100;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            animation: cardAppear 1s ease-out both;
+            border: 3px solid #ffca28;
+        }
+
+        @keyframes cardAppear {
+            from { opacity: 0; transform: scale(0.8) rotate(-5deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px) scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 50px rgba(255, 193, 7, 0.4);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-card .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            padding: 20px 15px 15px;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Message Section */
+        .message-section {
+            background: linear-gradient(135deg, rgba(255, 248, 225, 0.95), rgba(255, 236, 179, 0.95));
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.2);
+            animation: fadeInUp 1.5s ease-out 1.2s both;
+            border: 2px solid rgba(255, 193, 7, 0.4);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-section::before,
+        .message-section::after {
+            content: '🌻';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+        }
+
+        .message-section::before {
+            top: 10px;
+            left: 10px;
+            animation: spin 20s linear infinite;
+        }
+
+        .message-section::after {
+            bottom: 10px;
+            right: 10px;
+            animation: spin 20s linear infinite reverse;
+        }
+
+        .message-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: #bf360c;
+            line-height: 2;
+            font-weight: 500;
+        }
+
+        .message-text .highlight {
+            color: #e65100;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Flower cats section */
+        .flower-section {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(255, 193, 7, 0.15);
+            animation: fadeInUp 1.5s ease-out 1.5s both;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .flower-section .section-title {
+            color: #e65100;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 248, 225, 0.9);
+            border-radius: 25px;
+            animation: fadeInUp 1.5s ease-out 1.8s both;
+            border: 2px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .footer h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #e65100;
+            margin-bottom: 15px;
+        }
+
+        .footer .hearts {
+            font-size: 2rem;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        /* Sparkle effect */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffca28;
+            border-radius: 50%;
+            animation: sparkleAnim 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2.5rem; }
+            .timer-box .number { font-size: 1.5rem; }
+            .quote-text { font-size: 1.2rem; }
+            .message-text { font-size: 1rem; }
+            .image-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Loading animation */
+        .loading-heart {
+            display: inline-block;
+            animation: heartbeat 1s infinite;
+        }
+
+        /* Sunflower border decoration */
+        .sunflower-border {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 10s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-sunflower" style="top: 10%; left: 5%;">🌻</div>
+    <div class="floating-sunflower" style="top: 20%; right: 8%; animation-delay: 2s;">🌻</div>
+    <div class="floating-sunflower" style="top: 50%; left: 3%; animation-delay: 4s;">🌻</div>
+    <div class="floating-sunflower" style="top: 70%; right: 5%; animation-delay: 1s;">🌻</div>
+    <div class="floating-sunflower" style="top: 85%; left: 10%; animation-delay: 3s;">🌻</div>
+    <div class="floating-sunflower" style="top: 35%; right: 2%; animation-delay: 5s;">🌻</div>
+
+    <!-- Heart Particles -->
+    <div class="heart-particle" style="left: 10%; animation-delay: 0s;">💛</div>
+    <div class="heart-particle" style="left: 25%; animation-delay: 2s;">💛</div>
+    <div class="heart-particle" style="left: 40%; animation-delay: 4s;">💛</div>
+    <div class="heart-particle" style="left: 55%; animation-delay: 1s;">💛</div>
+    <div class="heart-particle" style="left: 70%; animation-delay: 3s;">💛</div>
+    <div class="heart-particle" style="left: 85%; animation-delay: 5s;">💛</div>
+    <div class="heart-particle" style="left: 15%; animation-delay: 6s;">💖</div>
+    <div class="heart-particle" style="left: 45%; animation-delay: 7s;">💖</div>
+    <div class="heart-particle" style="left: 75%; animation-delay: 8s;">💖</div>
+    <div class="heart-particle" style="left: 90%; animation-delay: 9s;">💛</div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="sunflower-icon">🌻</div>
+            <h1>My Beautiful Sunflower</h1>
+            <p style="color: #e65100; font-size: 1.1rem; margin-top: 10px;">You are my sunshine on cloudy days ☀️</p>
+        </div>
+
+        <!-- Timer Section -->
+        <div class="timer-section">
+            <div class="timer-title">Our Time Together ⏰</div>
+            <div class="timer-boxes" id="timer">
+                <div class="timer-box">
+                    <span class="number" id="days">0</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="timer-box">
+                    <span class="number" id="hours">0</span>
+                    <span class="label">Hours</span>
+                </div>
+                <div class="timer-box">
+                    <span class="number" id="minutes">0</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="timer-box">
+                    <span class="number" id="seconds">0</span>
+                    <span class="label">Seconds</span>
+                </div>
+            </div>
+
+            <div class="start-time">
+                Started on: July 15, 2025 at 3:03 PM
+            </div>
+
+            <div class="time-zones">
+                <div class="time-zone">
+                    <span class="flag">🇮🇹</span>
+                    <span class="country">Italy Time</span>
+                    <div class="current-time" id="italy-time">--:--</div>
+                </div>
+                <div class="time-zone">
+                    <span class="flag">🇵🇰</span>
+                    <span class="country">Pakistan Time</span>
+                    <div class="current-time" id="pakistan-time">--:--</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote Section -->
+        <div class="quote-section">
+            <div class="quote-text">
+                "Ye time dekh rahe ap I think it should never end and keep going like this forever" 💛
+            </div>
+        </div>
+
+        <!-- Sad Cats Section (Without You) -->
+        <div class="section">
+            <div class="section-title">This is me without you... 😿</div>
+            <div class="image-grid">
+                <div class="image-card" style="animation-delay: 0.2s;">
+                    <img src="/mnt/agents/upload/34032.jpg" alt="Sad Cat 1">
+                    <div class="overlay">Missing you so much...</div>
+                </div>
+                <div class="image-card" style="animation-delay: 0.4s;">
+                    <img src="/mnt/agents/upload/34031.jpg" alt="Sad Cat 2">
+                    <div class="overlay">Waiting for you...</div>
+                </div>
+                <div class="image-card" style="animation-delay: 0.6s;">
+                    <img src="/mnt/agents/upload/34030.jpg" alt="Sad Cat 3">
+                    <div class="overlay">Life feels empty...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Happy Cats Section (With You) -->
+        <div class="section">
+            <div class="section-title">This is me with you! 😻</div>
+            <div class="image-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+                <div class="image-card" style="animation-delay: 0.2s;">
+                    <img src="/mnt/agents/upload/34035.jpg" alt="Happy Cat 1">
+                    <div class="overlay">So happy with you! 💕</div>
+                </div>
+                <div class="image-card" style="animation-delay: 0.4s;">
+                    <img src="/mnt/agents/upload/34034.jpg" alt="Happy Cat 2">
+                    <div class="overlay">You make my heart sparkle! ✨</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Section -->
+        <div class="message-section">
+            <div class="message-text">
+                <span class="highlight">I really want ki ap khush raho</span> 🫠<br>
+                ap koi pain aisi koi cheez deserve ni karte<br>
+                <span class="highlight">ap happiness deserve karte..</span> 🌻<br><br>
+                I want to see you happy that's it<br>
+                aur muje maaf kar dena apko hurt karne ki waja se<br>
+                bas muje samj ni ata ki me kya aisa karu<br>
+                jisse ap accha feel karo<br>
+                <span class="highlight">im improving myself..</span> 💪<br><br>
+                Inshallah abhii tho hamne ik sath ghumna phirna<br>
+                aur me apni madam jee ko<br>
+                gusse me ya naraz nahi dekh sakta zyada<br>
+                dear ke liye 😽😽
+            </div>
+        </div>
+
+        <!-- Flower Cats Section -->
+        <div class="flower-section">
+            <div class="section-title">Ye phool meri beautiphool ke liye 🌹🌻💐</div>
+            <div class="image-grid">
+                <div class="image-card" style="animation-delay: 0.2s;">
+                    <img src="/mnt/agents/upload/34037.jpg" alt="Cat with flowers 1">
+                    <div class="overlay">For my sunflower 🌷</div>
+                </div>
+                <div class="image-card" style="animation-delay: 0.4s;">
+                    <img src="/mnt/agents/upload/34036.jpg" alt="Cat with flowers 2">
+                    <div class="overlay">You brighten my world 🌻</div>
+                </div>
+                <div class="image-card" style="animation-delay: 0.6s;">
+                    <img src="/mnt/agents/upload/34038.jpg" alt="Cat with flowers 3">
+                    <div class="overlay">My forever love 🌹</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h2>I Love You So Much</h2>
+            <div class="hearts">💖💛🌻💛💖</div>
+            <p style="color: #e65100; margin-top: 15px; font-size: 1rem;">
+                Forever & Always, Your Sunflower 🌻
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Timer functionality
+        function updateTimer() {
+            const startDate = new Date('2025-07-15T15:03:00');
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // Update time zones
+        function updateTimeZones() {
+            const now = new Date();
+
+            // Italy time (UTC+2)
+            const italyTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Rome"}));
+            const italyHours = String(italyTime.getHours()).padStart(2, '0');
+            const italyMinutes = String(italyTime.getMinutes()).padStart(2, '0');
+            document.getElementById('italy-time').textContent = `${italyHours}:${italyMinutes}`;
+
+            // Pakistan time (UTC+5)
+            const pakTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Karachi"}));
+            const pakHours = String(pakTime.getHours()).padStart(2, '0');
+            const pakMinutes = String(pakTime.getMinutes()).padStart(2, '0');
+            document.getElementById('pakistan-time').textContent = `${pakHours}:${pakMinutes}`;
+        }
+
+        // Initial update
+        updateTimer();
+        updateTimeZones();
+
+        // Update every second
+        setInterval(updateTimer, 1000);
+        setInterval(updateTimeZones, 1000);
+
+        // Add sparkle effects on click
+        document.addEventListener('click', function(e) {
+            createSparkle(e.pageX, e.pageY);
+        });
+
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.background = ['#ffca28', '#ffeb3b', '#ffc107', '#ff9800'][Math.floor(Math.random() * 4)];
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 3000);
+        }
+
+        // Auto-generate sparkles
+        setInterval(() => {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            createSparkle(x, y);
+        }, 2000);
+
+        // Add hover sound effect (visual feedback)
+        document.querySelectorAll('.image-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = '#ff9800';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = '#ffca28';
+            });
+        });
+    </script>
+</body>
+</html>
